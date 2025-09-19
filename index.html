@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Audio Evaluation Task</title>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 18px; margin: 18px; }
+    .rating-group { margin: 5px 0; }
+    .video-section { display: inline-block; vertical-align: top; width: 48%; margin-bottom:10px; }
+    video { width: 100%; height: auto; }
+    label { display: block; margin: 2px 0; }
+    select { width: 100%; font-size: 16px; }
+    button { font-size: 16px; padding: 8px 12px; margin: 5px; }
+    #rating-task { max-width: 1500px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+  <div id="cover-page">
+    <h3>Video Audio Evaluation Task</h3>
+    <p>为视频选择更合适的配音，并为每对音视频给出音频质量、语义对齐、时间对齐三个维度的评分。</p>
+    <button id="startTask">Start</button>
+  </div>
+
+  <div id="rating-task" style="display:none;">
+    <label>请选择: 下面两个视频哪一个的配音更合适，并为每对音视频给出评分</label>
+    <p id="question-counter"></p>
+
+    <div style="display:flex; justify-content: space-between;">
+      <!-- Video A -->
+      <div class="video-section">
+        <h4>Video A</h4>
+        <video id="videoA" controls></video>
+        <label><input type="radio" name="preferredAudio" value="A"> Audio of Video A is more suitable</label>
+      </div>
+
+      <!-- Video B -->
+      <div class="video-section">
+        <h4>Video B</h4>
+        <video id="videoB" controls></video>
+        <label><input type="radio" name="preferredAudio" value="B"> Audio of Video B is more suitable</label>
+      </div>
+    </div>
+
+    <!-- Equal Option 单独一行居中 -->
+    <div style="text-align:center; margin-top:10px;">
+      <label><input type="radio" name="preferredAudio" value="equal"> 两个音频都很合适(尽量不要选这个)</label>
+    </div>
+
+    <hr style="margin:5px 0;">
+
+    <div style="display:flex; justify-content: space-between;">
+      <div style="width:48%;">
+        <h4>Rate Video A</h4>
+        <div class="rating-group">
+          <label>Audio Quality(音频质量):</label>
+          <select id="qualityA"></select>
+        </div>
+        <div class="rating-group">
+          <label>Semantic Alignment(语义对齐):</label>
+          <select id="semanticA"></select>
+        </div>
+        <div class="rating-group">
+          <label>Temporal Alignment(时间对齐):</label>
+          <select id="temporalA"></select>
+        </div>
+      </div>
+
+      <div style="width:48%;">
+        <h4>Rate Video B</h4>
+        <div class="rating-group">
+          <label>Audio Quality(音频质量):</label>
+          <select id="qualityB"></select>
+        </div>
+        <div class="rating-group">
+          <label>Semantic Alignment(语义对齐):</label>
+          <select id="semanticB"></select>
+        </div>
+        <div class="rating-group">
+          <label>Temporal Alignment(时间对齐):</label>
+          <select id="temporalB"></select>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:5px;">
+      <button id="backBtn">Back</button>
+      <button id="submitBtn">Next</button>
+    </div>
+  </div>
+
+  <div id="complete" style="display:none;">
+    <h3>All questions finished. Thank you!</h3>
+    <button onclick="downloadCSV()">Download Results</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
